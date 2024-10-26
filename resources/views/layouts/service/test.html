@@ -1,0 +1,49 @@
+<div class="card-body">
+    <h5 class="card-title">Situation {{ $key + 1 }}</h5>
+    <div class="row mb-3">
+        <div class="col-md-4 font-weight-bold">عنوان آبشن</div>
+        <div class="col-md-4 font-weight-bold">Type</div>
+        <div class="col-md-4 font-weight-bold">Selection</div>
+    </div>
+
+    @foreach ($situation->{'count' . $key} as $option)
+    <div class="row mb-2 align-items-center">
+        <div class="col-md-4">{{ $option->option->title }}
+        </div>
+        <div class="col-md-4">
+            {{ $option->option->type == 'dropDown' ? 'Dropdown' : 'Radio' }}
+        </div>
+        <div class="col-md-4">
+            @if ($option->option->type == 'dropDown')
+            <input type="hidden" name="optionTitleOptionof{{ $key }}[]" value="{{ $option->option->title }}">
+            <select class="form-select form-control"
+                name="DropdownOptionofOption{{ $option->option->id }}ofCount{{ $key }}[]">
+                @foreach (explode(',', $option->option->options) as $dropdownOption)
+                <option value="{{ $dropdownOption }}" {{ $dropdownOption==$option->answer ? 'selected' : '' }}>
+                    {{ $dropdownOption }}
+                </option>
+                @endforeach
+            </select>
+            @else
+            <input type="hidden" name="optionTitleOptionof{{ $key }}[]" value="{{ $option->option->title }}">
+            @foreach (explode(',', $option->option->options) as $radioOption)
+            <label class="rdiobox">
+                <input name="typeofCounter{{ $key }}ofOption{{ $option->option->id }}[]" type="radio"
+                    value="{{ $radioOption }}" {{ $radioOption==$option->answer ? 'checked' : '' }}>
+                <span>{{ $radioOption }}</span>
+            </label><br>
+            @endforeach
+            @endif
+        </div>
+    </div>
+    @endforeach
+
+    <div class="row mt-3">
+        <div class="col-md-8 text-right font-weight-bold">
+            Price:</div>
+        <div class="col-md-4">
+            <input type="text" name="price{{ $key }}" class="form-control" placeholder="قیمت"
+                value="{{ $situation->price }}">
+        </div>
+    </div>
+</div>
