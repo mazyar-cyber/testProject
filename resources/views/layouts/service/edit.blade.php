@@ -337,7 +337,8 @@
 
                 // Make sure at least one option is selected
                 if (selectedOptions.length === 0) {
-                    alert('Please select at least one option.');
+                    alert('Please
+                    select at least one option.');
                     return;
                 }
 

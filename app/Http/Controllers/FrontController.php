@@ -78,6 +78,7 @@ class FrontController extends Controller
             $numberOfoptions[] = count($sit->$count);
             foreach ($sit->$count as $key => $option) {
                 $optionsIds[] = $option->option->id;
+                
             }
         }
         $optionsIds = array_unique($optionsIds);

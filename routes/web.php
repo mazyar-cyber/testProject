@@ -43,3 +43,6 @@ Route::get('/logout', function () {
     Auth::logout();
     return redirect()->back();
 });
+Route::get('testVue',function(){
+    return view('layouts.test.test');
+});
